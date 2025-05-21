@@ -1,0 +1,41 @@
+:root {
+  --base-color: lightgray;
+  --chip-background: lightskyblue;
+}
+
+.nooo {
+  border: 1px solid var(--base-color);
+  border-radius: 20px;
+  width: auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid blue;
+  padding: 5px;
+
+  #free-solo-demo {
+    padding: 10px 0px;
+    border: 0px;
+    width: 300px !important;
+  }
+}
+
+.the-button {
+  padding: 0px 5px;
+  background: transparent;
+  border: 0px;
+}
+
+.chip {
+  background-color: var(--chip-background) !important;
+  color: darkblue;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-family: sans-serif;
+
+}
