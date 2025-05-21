@@ -23,21 +23,37 @@ interface Item {
 
 const API_URL = 'https://652f91320b8d8ddac0b2b62b.mockapi.io/autocomplete';
 
-const timeSpanOptions: TimeSpanOption[] = [
+const MetricInput = () => {
+    const [valueSelected, setValueSelected] = useState('');
+    const [autocompleteData, setAutocompleteData] = useState([]);
+
+    
+
+const [timeSpanOptions,seTtimeSpanOptions]=useState([
     { value: 'this month', label: 'this month' },
     { value: 'previous month', label: 'previous month' },
     { value: '1 year ago', label: '1 year ago' },
-];
+])
 
-const MetricInput = async () => {
-    const [valueSelected, setValueSelected] = useState('');
+    // const fetchAutocompleteData = async () => {
+    //     const response = await axios.get(API_URL);
+    //     return response.data;
+    // };
 
-    const fetchAutocompleteData = async () => {
-        const response = await axios.get(API_URL);
-        return response.data;
+    // const autocompleteData = await fetchAutocompleteData();
+
+     useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(API_URL);
+        const result = await response.json();
+        setAutocompleteData(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
-
-    const autocompleteData = await fetchAutocompleteData();
+    fetchData();
+  }, []);
 
 
     const [allItems, setAllItems] = useState<Item[]>([
@@ -136,7 +152,7 @@ const MetricInput = async () => {
                 ) : i.type === 'pill' ? (
                     <Pill item={i} index={index} key={index} updatePill={updatePill} />
                 ) : (
-                    <Pill item={i} index={index} key={index} updatePill={updatePill} />
+                    <Pill item={i} index={index} key={index} updatePill={updatePill} data={timeSpanOptions} />
                 );
             })}
             {/* <input type='text' placeholder='Type the expression' /> */}
@@ -216,8 +232,8 @@ const Pill = (props: any) => {
                             'aria-labelledby': 'basic-button',
                         }}
                     >
-                        {timeSpanOptions.length > 0 &&
-                            timeSpanOptions.map((option: TimeSpanOption, index: number) => (
+                        {props.timeSpanOptions &&
+                            props.timeSpanOptions.map((option: TimeSpanOption, index: number) => (
                                 <MenuItem
                                     onClick={() => {
                                        props.updatePill({option,index:props.index})
