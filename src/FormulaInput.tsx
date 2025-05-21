@@ -56,33 +56,7 @@ const [timeSpanOptions,seTtimeSpanOptions]=useState([
   }, []);
 
 
-    const [allItems, setAllItems] = useState<Item[]>([
-
-        {
-            type: 'text',
-            value: '12'
-        },
-        {
-            type: 'pill',
-            value: '% Churn rate'
-        },
-        {
-            type: 'pillWithDropdown',
-            value: '# Inbound leads',
-            hasDropdown: true,
-            dropdownValue: 'this month'
-        },
-        {
-            type: 'text',
-            value: '-'
-        },
-        {
-            type: 'pillWithDropdown',
-            value: '# Outbound messages',
-            hasDropdown: true,
-            dropdownValue: 'last 3 months'
-        }
-    ])
+    const [allItems, setAllItems] = useState<Item[]>([])
 
 
 
